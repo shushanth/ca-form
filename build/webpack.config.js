@@ -14,6 +14,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['.vue', '.js', '.json'],
+    alias: {
+      styles: resolvePathDir('src/assets/styles/'),
+    },
   },
   devServer: {
     port: DEV_PORT,
@@ -36,6 +39,10 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: ['vue-style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
