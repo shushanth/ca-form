@@ -1,17 +1,22 @@
 <template>
-  <div>I'm main Vue</div>
+  <div class="app">
+    <QuestionForm />
+  </div>
 </template>
 <script>
+import QuestionForm from "./components/QuestionForm";
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    QuestionForm
+  }
 };
 </script>
 <style lang="scss">
 @import "styles/base.scss";
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 40px;
+.app {
+  margin: 15px;
+  background-color: $styles-color--green-sharp;
+  @include styles-flex(column);
 }
 </style>

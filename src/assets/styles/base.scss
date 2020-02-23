@@ -1,16 +1,17 @@
 @import './variables.scss';
+@import './mixins/flex.scss';
 html {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   font-size: $styles-font--size-default !important;
-  font-family: $styles-font--family-montserrat;
+  font-family: $styles-font--family-default;
 }
 
 body {
-  font-family: $styles-font--family-montserrat;
-  font-size: $styles-font--size-basic !important;
-  background-color: #fff;
+  background-color: $styles-color--white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 html,
 body,
