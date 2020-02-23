@@ -4,7 +4,12 @@
     <p class="radio_group--sublabel">{{subLabel}}</p>
     <div class="radio_group--list">
       <template v-for="(item, index) in this.radioItems.options">
-        <base-radio :key="index" :selected="item.selected" :id="`${item.id}`" :value="item.value" @onRadioUpdate="onRadioUpdate(item.value)">
+        <base-radio 
+          :key="index" 
+          :id="item.id" 
+          :value="item.value"
+          :selectedRadio="selectedRadio" 
+          @onRadioUpdate="onRadioUpdate(item.value)">
         </base-radio>
       </template>
     </div>
@@ -25,9 +30,14 @@ export default {
     align: String,
   },
   methods: {
-    onRadioUpdate(selectedRadio) {
-      console.log(selectedRadio);
+    onRadioUpdate(radioUpdated) {
+      this.selectedRadio = radioUpdated;
     },
+  },
+  data() {
+    return {
+      selectedRadio: '1',
+    };
   },
 };
 </script>

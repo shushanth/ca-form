@@ -32,7 +32,6 @@ export default {
   data() {
     return {
       ratings: {
-        selected: '1',
         options: [
           { value: '1', id: 1 },
           {
