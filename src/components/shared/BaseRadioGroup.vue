@@ -24,8 +24,9 @@
           :value="item.value"
           :size="size"
           :startItem="item.id === 1"
+          :selectedRadioButton="selectedRadioButton"
           :endItem="checkIfLastButtonItem(item.id)"
-          @onRadioUpdate="onRadioUpdate(item.value)">
+          @onRadioButtonUpdate="onRadioButtonUpdate">
         </base-radio-button>
       </template>
       </template>
@@ -55,6 +56,10 @@ export default {
     onRadioUpdate(radioUpdated) {
       this.selectedRadio = radioUpdated;
     },
+    onRadioButtonUpdate(radioButtonUpdatedConfig) {
+      const { value, selectedId } = radioButtonUpdatedConfig;
+      this.selectedRadioButton = selectedId;
+    },
     checkIfLastButtonItem(id) {
       const { options } = this.radioButtonsItems;
       return id === options.length;
@@ -67,6 +72,7 @@ export default {
   data() {
     return {
       selectedRadio: '1',
+      selectedRadioButton: 1,
     };
   },
 };

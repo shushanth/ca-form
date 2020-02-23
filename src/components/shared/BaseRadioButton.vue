@@ -10,8 +10,10 @@
         'radio_button': true,
         'radio_button--start': this.startItem,
         'radio_button--end': this.endItem,
-        'radio_button-no--border': !this.endItem && !this.startItem
-      }">
+        'radio_button-no--border': !this.endItem && !this.startItem,
+        'radio_button--selected': this.selectedRadioButton === this.id ? true: false,
+      }"
+      @click="onRadioButtonUpdate">
       <span class="">{{value}}</span>
     </button>
   </div>
@@ -25,11 +27,20 @@ export default {
     endItem: Boolean,
     value: String,
     size: String,
+    selectedRadioButton: Number,
   },
   methods: {
     onRadioButtonUpdate() {
-      this.$emit('onUpdate', this.value);
+      this.$emit('onRadioButtonUpdate', {
+        value: this.value,
+        selectedId: this.id,
+      });
     },
+  },
+  data() {
+    return {
+      selectedBtnId: this.selectedRadioButton,
+    };
   },
 };
 </script>
@@ -43,6 +54,9 @@ export default {
     cursor: pointer;
     border-color: $styles-color-black--light;
     width: 100%;
+    &--selected {
+      background: #c9c9c9;
+    }
     &-no--border {
       border-left: 0;
     }
