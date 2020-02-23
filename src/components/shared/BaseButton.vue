@@ -20,10 +20,10 @@ export default {
     onClick: Function,
   },
   methods: {
-    btnClick () {
+    btnClick() {
       this.$emit('onClick');
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">

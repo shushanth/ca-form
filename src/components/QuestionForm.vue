@@ -1,10 +1,21 @@
 <template>
   <div class="question-form">
-    <form-header level="primary" label="Customer Alliance Form"></form-header>
-    <form-ratings label="1." subLabel="How do you feel today?" shape="round" :radioItems="ratings"></form-ratings>
-    <form-password label="3." subLabel="Your password" shape="rounded"></form-password>
-    <form-email label="4." subLabel="Your email address" shape="rounded"></form-email>
-    <form-submit label="submit" type="primary" size="default" align="end" shape="rounded" @onClick="onFormSubmit"></form-submit>
+    <form-header level="primary" label="Customer Alliance Form" />
+    <form-ratings 
+      label="1." 
+      type="radio"
+      subLabel="How do you feel today?" 
+      shape="round" 
+      :radioItems="ratings"/>
+    <form-age
+      label="2." 
+      type="buttons"
+      subLabel="Your age"
+      :radioButtonsItems="ages"
+      size="default"/>
+    <form-password label="3." subLabel="Your password" shape="rounded" />
+    <form-email label="4." subLabel="Your email address" shape="rounded" />
+    <form-submit label="submit" type="primary" size="default" align="end" shape="rounded" @onClick="onFormSubmit" />
   </div>
 </template>
 <script>
@@ -23,6 +34,7 @@ export default {
     'form-password': BaseInput,
     'form-submit': BaseButton,
     'form-ratings': BaseRadioGroup,
+    'form-age': BaseRadioGroup,
   },
   methods: {
     onFormSubmit() {
@@ -50,6 +62,18 @@ export default {
             value: '5',
             id: 5,
           },
+        ],
+      },
+      ages: {
+        options: [
+          { value: '<20', id: 1 },
+          { value: '20-29', id: 2 },
+          { value: '30-39', id: 3 },
+          { value: '40-49', id: 4 },
+          { value: '50-59', id: 5 },
+          { value: '60-69', id: 6 },
+          { value: '70-79', id: 7 },
+          { value: '80+', id: 8 },
         ],
       },
     };
