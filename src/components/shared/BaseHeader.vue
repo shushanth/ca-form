@@ -1,6 +1,10 @@
 <template>
-  <div class="header-wrapper">
-    <h1 :class="styleConfig">{{label}}</h1>
+  <div class="header_wrapper">
+    <h1
+      :class="{
+      'header_color--primary': this.level === 'primary' ? true: false,
+    }"
+    >{{label}}</h1>
   </div>
 </template>
 <script>
@@ -9,22 +13,15 @@ export default {
   props: {
     label: String,
     level: String
-  },
-  data() {
-    return {
-      styleConfig: {
-        ["header-color--primary"]: this.level === "primary" ? true : false
-      }
-    };
   }
 };
 </script>
 <style lang='scss'>
 @import "styles/base.scss";
-.header-wrapper {
+.header_wrapper {
   display: flex;
 }
-.header-color--primary {
+.header_color--primary {
   color: $styles-color-blue--cloud;
 }
 </style>
