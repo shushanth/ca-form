@@ -1,17 +1,32 @@
 <template>
-  <div>I'm main Vue</div>
+  <div class="app">
+    <QuestionForm :formModel="questionsModel"></QuestionForm>
+  </div>
 </template>
 <script>
+import QuestionForm from "./components/QuestionForm";
+/*
+ FORM_MODEL an API response and can use to manage state of question form component  
+*/
+import { FORM_MODEL } from "./formModel.js";
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    QuestionForm
+  },
+
+  data() {
+    return {
+      questionsModel: FORM_MODEL.questions
+    };
+  }
 };
 </script>
 <style lang="scss">
 @import "styles/base.scss";
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 40px;
+.app {
+  margin: 15px;
+  background-color: $styles-color--green-sharp;
+  @include styles-flex(column);
 }
 </style>
