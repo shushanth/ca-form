@@ -16,6 +16,7 @@ module.exports = {
     extensions: ['.vue', '.js', '.json'],
     alias: {
       styles: resolvePathDir('src/assets/styles/'),
+      '@/components': resolvePathDir('src/components/'),
     },
   },
   devServer: {
@@ -30,11 +31,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        options: {
-          presets: ['@babel/preset-env'],
-        },
+        exclude: resolvePathDir('node_modules'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: [['@babel/preset-env']],
+            },
+          },
+        ],
       },
       {
         test: /\.vue$/,

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import QuestionForm from "./components/QuestionForm";
+import QuestionForm from "@/components/QuestionForm";
 /*
  FORM_MODEL an API response and can use to manage state of question form component  
 */
@@ -26,7 +26,6 @@ export default {
 @import "styles/base.scss";
 .app {
   margin: 15px;
-  background-color: $styles-color--green-sharp;
   @include styles-flex(column);
 }
 </style>
