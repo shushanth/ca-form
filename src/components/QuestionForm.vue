@@ -8,6 +8,7 @@
         subLabel="How do you feel today?"
         shape="round"
         :radioItems="ratings"
+        :isRadioSelected="false"
       />
       <form-age
         label="2."
@@ -15,6 +16,7 @@
         subLabel="Your age"
         :radioButtonsItems="ages"
         size="default"
+        :isRadioButtonSelected="false"
       />
       <form-password label="3." type="password" subLabel="Your password" shape="rounded"/>
       <form-email label="4." type="text" subLabel="Your email address" shape="rounded"/>
