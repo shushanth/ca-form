@@ -2,8 +2,8 @@
   <div
     :class="{
       'card_wrapper': true, 
-      'card_wrapper_align--default': this.position === 'default' ? true: false,
-      'card_wrapper_shape--rounded': this.shape === 'rounded' ? true: false,
+      'card_wrapper_align--default': (this.position === 'default') || false,
+      'card_wrapper_shape--rounded': (this.shape === 'rounded') || false,
     }"
   >
     <slot></slot>

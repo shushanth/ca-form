@@ -1,5 +1,5 @@
 <template>
-  <BaseCard position="default" shape="rounded">
+  <form-card position="default" shape="rounded">
     <div class="question-form">
       <form-header level="primary" label="Customer Alliance Form"/>
       <form-ratings
@@ -27,7 +27,7 @@
         @onClick="onFormSubmit"
       />
     </div>
-  </BaseCard>
+  </form-card>
 </template>
 <script>
 import BaseCard from '@/components/shared/BaseCard';
@@ -47,7 +47,7 @@ export default {
     'form-submit': BaseButton,
     'form-ratings': BaseRadioGroup,
     'form-age': BaseRadioGroup,
-    BaseCard,
+    'form-card': BaseCard,
   },
   methods: {
     onFormSubmit() {

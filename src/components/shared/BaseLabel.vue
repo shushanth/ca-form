@@ -2,9 +2,9 @@
   <div class="label_wrapper">
     <p
       :class="{
-      'label_item': true,
-      'label_color--primary': this.labelLevel === 'primary' ? true: false,
-    }"
+        'label_item': true,
+        'label_color--primary': (this.labelLevel === 'primary') || false,
+      }"
     >{{label}}</p>
     <p class="label_subitem">{{subLabel}}</p>
   </div>

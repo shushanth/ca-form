@@ -2,8 +2,8 @@
   <div class="header_wrapper">
     <h1
       :class="{
-      'header_color--primary': this.level === 'primary' ? true: false,
-    }"
+        'header_color--primary': (this.level === 'primary') || false,
+      }"
     >{{label}}</h1>
   </div>
 </template>
