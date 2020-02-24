@@ -17,11 +17,15 @@ export default {
 };
 </script>
 <style lang='scss'>
-@import "styles/base.scss";
-.header_wrapper {
-  display: flex;
-}
-.header_color--primary {
-  color: $styles-color-blue--cloud;
+@import 'styles/base.scss';
+.header {
+  &_wrapper {
+    @include styles-flex(row);
+  }
+  &_color {
+    &--primary {
+      color: $styles-color-blue--cloud;
+    }
+  }
 }
 </style>

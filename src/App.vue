@@ -4,28 +4,29 @@
   </div>
 </template>
 <script>
-import QuestionForm from "@/components/QuestionForm";
+import QuestionForm from '@/components/QuestionForm';
 /*
  FORM_MODEL an API response and can use to manage state of question form component  
 */
-import { FORM_MODEL } from "./formModel.js";
+import { FORM_MODEL } from './formModel.js';
 export default {
-  name: "App",
+  name: 'App',
   components: {
-    QuestionForm
+    QuestionForm,
   },
 
   data() {
     return {
-      questionsModel: FORM_MODEL.questions
+      questionsModel: FORM_MODEL.questions,
     };
-  }
+  },
 };
 </script>
 <style lang="scss">
-@import "styles/base.scss";
+@import 'styles/base.scss';
 .app {
-  margin: 15px;
   @include styles-flex(column);
+  background-color: $styles-color-gray-medium;
+  height: 100%; 
 }
 </style>

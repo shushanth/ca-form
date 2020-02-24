@@ -1,7 +1,6 @@
 <template>
   <div class="radio_group">
-    <label class="radio_group--label">{{label}}</label>
-    <p class="radio_group--sublabel">{{subLabel}}</p>
+    <base-label :label="label" labelLevel="primary" :subLabel="subLabel" />
     <div class="radio_group--list">
       <template v-if="type === 'radio'">
       <template v-for="(item, index) in this.radioItems.options">
@@ -35,11 +34,13 @@
 <script>
 import BaseRadio from './BaseRadio';
 import BaseRadioButton from './BaseRadioButton';
+import BaseLabel from './BaseLabel';
 export default {
   name: 'BaseRadioGroup',
   components: {
     'base-radio': BaseRadio,
     'base-radio-button': BaseRadioButton,
+    'base-label': BaseLabel,
   },
   props: {
     label: String,
@@ -66,7 +67,8 @@ export default {
   },
   data() {
     return {
-      selectedRadio: '1',
+      selectedRadio: 0,
+      selectedRadioButton: 1,
     };
   },
 };

@@ -43,6 +43,9 @@ export default {
     cursor: pointer;
     border-color: $styles-color-black--light;
     width: 100%;
+    &--selected {
+      background: $styles-color-green--peach;
+    }
     &-no--border {
       border-left: 0;
     }
