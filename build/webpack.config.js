@@ -1,10 +1,16 @@
 'use strict';
 
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
-const { HotModuleReplacementPlugin } = require('webpack');
-const { DEV_PORT, resolvePathDir } = require('./helpers');
+const {
+  VueLoaderPlugin
+} = require('vue-loader');
+const {
+  HotModuleReplacementPlugin
+} = require('webpack');
+const {
+  DEV_PORT,
+  resolvePathDir
+} = require('./helpers');
 
 module.exports = {
   entry: './src/main.js',
@@ -28,18 +34,17 @@ module.exports = {
     contentBase: resolvePathDir('dist'),
   },
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js$/,
         exclude: resolvePathDir('node_modules'),
-        use: [
-          {
-            loader: 'babel-loader',
-            options: {
-              presets: [['@babel/preset-env']],
-            },
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env']
+            ],
           },
-        ],
+        }, ],
       },
       {
         test: /\.vue$/,
