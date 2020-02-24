@@ -1,10 +1,10 @@
 <template>
   <div class="header_wrapper">
-    <h1
+    <h2 v-if="this.level ==='medium'"
       :class="{
-        'header_color--primary': (this.level === 'primary') || false,
+        'header_color--primary': (this.type === 'primary') || false,
       }"
-    >{{label}}</h1>
+    >{{label}}</h2>
   </div>
 </template>
 <script>
@@ -13,6 +13,7 @@ export default {
   props: {
     label: String,
     level: String,
+    type: String,
   },
 };
 </script>
@@ -21,6 +22,8 @@ export default {
 .header {
   &_wrapper {
     @include styles-flex(row);
+    margin: 10px 0 20px;
+    padding: 10px 0;
   }
   &_color {
     &--primary {

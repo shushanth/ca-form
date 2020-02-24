@@ -85,6 +85,7 @@ export default {
 @import 'styles/base.scss';
 .radio_group {
   @include styles-flex(column);
+  margin: 10px 0;
   &--label {
     color: $styles-color-blue--cloud;
     font-size: 15px;
@@ -99,33 +100,7 @@ export default {
     @include styles-flex(row);
   }
 }
-.form-rating-container {
-  display: flex;
-  flex-direction: column;
-}
-.label {
-  font-size: 18px;
-  color: $styles-color-green--sharp;
-  margin: 10px 0;
-}
-.ratings {
-  margin: 10px 0;
-  display: flex;
-}
-.radio-item {
-  position: absolute;
-  font-size: 15px;
-  top: 10px;
-  left: 15px;
-  z-index: 10000;
-}
 
-.radio-container {
-  display: flex;
-  height: 40px;
-  width: auto;
-  margin: 0 10px;
-}
 
 [type='radio']:checked,
 [type='radio']:not(:checked) {

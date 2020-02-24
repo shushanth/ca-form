@@ -1,7 +1,7 @@
 <template>
-  <form-card position="default" shape="rounded">
+  <form-card type="fullPage" shape="rounded">
     <div class="question-form">
-      <form-header level="primary" label="Customer Alliance Form"/>
+      <form-header type="primary" level="medium" label="Customer Alliance Form"/>
       <form-ratings
         label="1."
         type="radio"
@@ -99,5 +99,6 @@ export default {
 @import 'styles/base.scss';
 .question-form {
   @include styles-flex(column);
+  width: 80%;
 }
 </style>

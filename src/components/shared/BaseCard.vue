@@ -2,7 +2,7 @@
   <div
     :class="{
       'card_wrapper': true, 
-      'card_wrapper_align--default': (this.position === 'default') || false,
+      'card_wrapper_type--page': (this.type === 'fullPage') || false,
       'card_wrapper_shape--rounded': (this.shape === 'rounded') || false,
     }"
   >
@@ -13,7 +13,7 @@
 export default {
   name: 'BaseCard',
   props: {
-    position: String,
+    type: String,
     shape: String,
   },
 };
@@ -24,7 +24,7 @@ export default {
   &_wrapper {
     @include styles-flex(column);
     @extend .app_color--white;
-    &_align--default {
+    &_type--page {
       margin: 50px 180px 0;
       padding: 40px;
       height: 100vh;
