@@ -4,31 +4,31 @@
     <p class="radio_group--sublabel">{{subLabel}}</p>
     <div class="radio_group--list">
       <template v-if="type === 'radio'">
-      <template v-for="(item, index) in this.radioItems.options">
-        <base-radio 
-          :key="index" 
-          :id="item.id" 
-          :value="item.value"
-          :startItem="item.id === 1"
-          :endItem="checkIfLastRadioItems(item.id)"
-          :selectedRadio="selectedRadio" 
-          @onRadioUpdate="onRadioUpdate(item.value)">
-        </base-radio>
-      </template>
+        <template v-for="(item, index) in this.radioItems.options">
+          <base-radio
+            :key="index"
+            :id="item.id"
+            :value="item.value"
+            :startItem="item.id === 1"
+            :endItem="checkIfLastRadioItems(item.id)"
+            :selectedRadio="selectedRadio"
+            @onRadioUpdate="onRadioUpdate(item.value)"
+          ></base-radio>
+        </template>
       </template>
       <template v-if="type === 'buttons'">
-      <template v-for="(item, index) in this.radioButtonsItems.options">
-        <base-radio-button 
-          :key="index" 
-          :id="item.id" 
-          :value="item.value"
-          :size="size"
-          :startItem="item.id === 1"
-          :selectedRadioButton="selectedRadioButton"
-          :endItem="checkIfLastButtonItem(item.id)"
-          @onRadioButtonUpdate="onRadioButtonUpdate">
-        </base-radio-button>
-      </template>
+        <template v-for="(item, index) in this.radioButtonsItems.options">
+          <base-radio-button
+            :key="index"
+            :id="item.id"
+            :value="item.value"
+            :size="size"
+            :startItem="item.id === 1"
+            :selectedRadioButton="selectedRadioButton"
+            :endItem="checkIfLastButtonItem(item.id)"
+            @onRadioButtonUpdate="onRadioButtonUpdate"
+          ></base-radio-button>
+        </template>
       </template>
     </div>
   </div>

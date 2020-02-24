@@ -13,8 +13,8 @@
       subLabel="Your age"
       :radioButtonsItems="ages"
       size="default"/>
-    <form-password label="3." subLabel="Your password" shape="rounded" />
-    <form-email label="4." subLabel="Your email address" shape="rounded" />
+    <form-password label="3." type="password" subLabel="Your password" shape="rounded" />
+    <form-email label="4." type="text" subLabel="Your email address" shape="rounded" />
     <form-submit label="submit" type="primary" size="default" align="end" shape="rounded" @onClick="onFormSubmit" />
   </div>
 </template>

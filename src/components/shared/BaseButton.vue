@@ -1,11 +1,14 @@
 <template>
   <div class="button_wrapper">
-    <button :class="{
+    <button
+      :class="{
     'button_color--primary': this.type === 'primary' ? true : false,
     'button_size--default': this.size === 'default' ? true: false,
     'button--rounded': this.shape === 'rounded' ? true: false,
     'button_align--end': this.align === 'end' ? true: false,
-    }" @click="btnClick()">{{this.label || 'button'}}</button>
+    }"
+      @click="btnClick()"
+    >{{this.label || 'button'}}</button>
   </div>
 </template>
 <script>

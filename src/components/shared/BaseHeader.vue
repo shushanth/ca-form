@@ -9,15 +9,15 @@
 </template>
 <script>
 export default {
-  name: "BaseHeader",
+  name: 'BaseHeader',
   props: {
     label: String,
-    level: String
-  }
+    level: String,
+  },
 };
 </script>
 <style lang='scss'>
-@import "styles/base.scss";
+@import 'styles/base.scss';
 .header_wrapper {
   display: flex;
 }
