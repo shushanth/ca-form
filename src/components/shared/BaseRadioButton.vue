@@ -55,7 +55,7 @@ export default {
     border-color: $styles-color-black--light;
     width: 100%;
     &--selected {
-      background: #c9c9c9;
+      background: $styles-color-gray-light;
     }
     &-no--border {
       border-left: 0;

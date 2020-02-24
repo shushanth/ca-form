@@ -68,7 +68,7 @@ export default {
   content: '';
   width: 40px;
   height: 40px;
-  background: #c9c9c9;
+  background: $styles-color-gray-light;
   position: absolute;
   top: 0;
   left: 0;
