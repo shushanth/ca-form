@@ -2,7 +2,10 @@
   <div class="input">
     <base-label :label="label" labelLevel="primary" :subLabel="subLabel" />
     <input
-      :class="{'input_element': true, 'input_element--rounded': this.shape === 'rounded' ? true : false }"
+      :class="{
+        'input_element': true, 
+        'input_element--rounded': (this.shape === 'rounded') || false 
+      }"
       @input="onInputChange"
       @change="onInputChange"
       :type="type"

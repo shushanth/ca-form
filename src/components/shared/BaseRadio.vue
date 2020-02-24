@@ -2,7 +2,7 @@
   <div
     :class="{
       'radio_container': true, 
-      'radio_container--start': this.id === 1 ? true : false
+      'radio_container--start': (this.id === 1)  || false
     }"
   >
     <input
