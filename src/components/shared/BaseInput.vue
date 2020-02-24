@@ -3,8 +3,7 @@
     <label class="input_label">{{label}}</label>
     <span class="input_sublabel" v-if="this.subLabel">{{subLabel}}</span>
     <input
-      :class="
-      {'input_element': true, 'input_element--rounded': this.shape === 'rounded' ? true : false }"
+      :class="{'input_element': true, 'input_element--rounded': this.shape === 'rounded' ? true : false }"
       @input="onInputChange"
       @change="onInputChange"
       :type="type"
