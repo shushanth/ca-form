@@ -1,5 +1,5 @@
 <template>
-  <form-card type="fullPage" shape="rounded">
+  <form-card type="fullPage" shape="roundedTop" mode="default">
     <div class="question-form">
       <form-header type="primary" level="medium" label="Customer Alliance Form"/>
       <form-ratings
