@@ -52,6 +52,8 @@ export default {
     align: String,
     type: String,
     size: String,
+    isRadioSelected: Boolean,
+    isRadioButtonSelected: Boolean,
   },
   methods: {
     onRadioUpdate(radioUpdated) {
@@ -73,8 +75,8 @@ export default {
   },
   data() {
     return {
-      selectedRadio: 0,
-      selectedRadioButton: 1,
+      selectedRadio: Number(this.isRadioSelected),
+      selectedRadioButton: Number(this.isRadioButtonSelected),
     };
   },
 };
