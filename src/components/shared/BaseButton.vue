@@ -2,6 +2,7 @@
   <div class="button_wrapper">
     <button
       :class="{
+      'button': true,
       'button_color--primary': (this.type === 'primary') || false,
       'button_size--default': (this.size === 'default') || false,
       'button--rounded': (this.shape === 'rounded') || false,
@@ -37,6 +38,7 @@ export default {
   .button {
     outline: 0;
     padding: 20px;
+    cursor: pointer;
     &_color {
       &--primary {
         background: $styles-color-green--peach;
