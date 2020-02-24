@@ -33,7 +33,10 @@ export default {
       return this.selectedRadio === this.id;
     },
     onRadioUpdate() {
-      this.$emit('onRadioUpdate', this.value);
+      this.$emit('onRadioUpdate', {
+        value: this.value,
+        seleced: this.id,
+      });
     },
   },
 };

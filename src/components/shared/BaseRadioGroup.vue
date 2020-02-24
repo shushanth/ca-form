@@ -55,7 +55,8 @@ export default {
   },
   methods: {
     onRadioUpdate(radioUpdated) {
-      this.selectedRadio = radioUpdated;
+      const { value, selectedId } = radioUpdated;
+      this.selectedRadio = selectedId;
     },
     onRadioButtonUpdate(radioButtonUpdatedConfig) {
       const { value, selectedId } = radioButtonUpdatedConfig;
