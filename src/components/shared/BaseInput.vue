@@ -1,7 +1,6 @@
 <template>
   <div class="input">
-    <label class="input_label">{{label}}</label>
-    <span class="input_sublabel" v-if="this.subLabel">{{subLabel}}</span>
+    <base-label :label="label" labelLevel="primary" :subLabel="subLabel" />
     <input
       :class="{'input_element': true, 'input_element--rounded': this.shape === 'rounded' ? true : false }"
       @input="onInputChange"
@@ -11,6 +10,7 @@
   </div>
 </template>
 <script>
+import BaseLabel from './BaseLabel';
 export default {
   name: 'BaseInput',
   props: {
@@ -20,6 +20,9 @@ export default {
     shape: String,
     type: String,
     onUpdate: Function,
+  },
+  components: {
+    'base-label': BaseLabel,
   },
   methods: {
     onInputChange({ target }) {

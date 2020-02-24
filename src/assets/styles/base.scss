@@ -1,7 +1,6 @@
 @import './variables.scss';
 @import './mixins/flex.scss';
 html {
-  height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
   font-size: $styles-font--size-default !important;
@@ -12,6 +11,7 @@ body {
   background-color: $styles-color-white;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
 }
 html,
 body,
@@ -65,4 +65,8 @@ button,
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;
+}
+
+.app_color--white {
+  background-color: $styles-color-white;
 }

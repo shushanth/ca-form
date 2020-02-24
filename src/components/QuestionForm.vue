@@ -1,33 +1,36 @@
 <template>
-  <div class="question-form">
-    <form-header level="primary" label="Customer Alliance Form"/>
-    <form-ratings
-      label="1."
-      type="radio"
-      subLabel="How do you feel today?"
-      shape="round"
-      :radioItems="ratings"
-    />
-    <form-age
-      label="2."
-      type="buttons"
-      subLabel="Your age"
-      :radioButtonsItems="ages"
-      size="default"
-    />
-    <form-password label="3." type="password" subLabel="Your password" shape="rounded"/>
-    <form-email label="4." type="text" subLabel="Your email address" shape="rounded"/>
-    <form-submit
-      label="submit"
-      type="primary"
-      size="default"
-      align="end"
-      shape="rounded"
-      @onClick="onFormSubmit"
-    />
-  </div>
+  <BaseCard position="default" shape="rounded">
+    <div class="question-form">
+      <form-header level="primary" label="Customer Alliance Form"/>
+      <form-ratings
+        label="1."
+        type="radio"
+        subLabel="How do you feel today?"
+        shape="round"
+        :radioItems="ratings"
+      />
+      <form-age
+        label="2."
+        type="buttons"
+        subLabel="Your age"
+        :radioButtonsItems="ages"
+        size="default"
+      />
+      <form-password label="3." type="password" subLabel="Your password" shape="rounded"/>
+      <form-email label="4." type="text" subLabel="Your email address" shape="rounded"/>
+      <form-submit
+        label="submit"
+        type="primary"
+        size="default"
+        align="end"
+        shape="rounded"
+        @onClick="onFormSubmit"
+      />
+    </div>
+  </BaseCard>
 </template>
 <script>
+import BaseCard from '@/components/shared/BaseCard';
 import BaseInput from '@/components/shared/BaseInput';
 import BaseHeader from '@/components/shared/BaseHeader';
 import BaseButton from '@/components/shared/BaseButton';
@@ -44,6 +47,7 @@ export default {
     'form-submit': BaseButton,
     'form-ratings': BaseRadioGroup,
     'form-age': BaseRadioGroup,
+    BaseCard,
   },
   methods: {
     onFormSubmit() {

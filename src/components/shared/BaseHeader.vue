@@ -18,10 +18,14 @@ export default {
 </script>
 <style lang='scss'>
 @import 'styles/base.scss';
-.header_wrapper {
-  display: flex;
-}
-.header_color--primary {
-  color: $styles-color-blue--cloud;
+.header {
+  &_wrapper {
+    @include styles-flex(row);
+  }
+  &_color {
+    &--primary {
+      color: $styles-color-blue--cloud;
+    }
+  }
 }
 </style>
