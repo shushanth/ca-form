@@ -27,6 +27,5 @@ export default {
 .app {
   @include styles-flex(column);
   background-color: $styles-color-gray-medium;
-  height: 100%; 
 }
 </style>

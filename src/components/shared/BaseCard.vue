@@ -27,7 +27,6 @@ export default {
     &_type--page {
       margin: 50px 180px 0;
       padding: 40px;
-      height: 100vh;
     }
     &_shape--rounded {
       border-top-left-radius: 20px;
