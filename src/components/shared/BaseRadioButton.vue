@@ -1,11 +1,13 @@
 <template>
-  <div :class="{
+  <div
+    :class="{
       'radio_button_container': true, 
       'radio_container--start': this.startItem,
       'radio_container--end': this.endItem,
       'radio_container_size--default': this.size === 'default' ? true : false,
-    }">
-    <button 
+    }"
+  >
+    <button
       :class="{
         'radio_button': true,
         'radio_button--start': this.startItem,
@@ -13,8 +15,9 @@
         'radio_button-no--border': !this.endItem && !this.startItem,
         'radio_button--selected': this.selectedRadioButton === this.id ? true: false,
       }"
-      @click="onRadioButtonUpdate">
-      <span class="">{{value}}</span>
+      @click="onRadioButtonUpdate"
+    >
+      <span class>{{value}}</span>
     </button>
   </div>
 </template>

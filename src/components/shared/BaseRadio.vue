@@ -1,16 +1,19 @@
 <template>
-  <div :class="{
+  <div
+    :class="{
       'radio_container': true, 
       'radio_container--start': this.id === 1 ? true : false
-    }">
-    <input 
-      class="radio_element" 
-      type="radio" 
-      name="radio" 
-      :id="id" 
-      :value="value" 
+    }"
+  >
+    <input
+      class="radio_element"
+      type="radio"
+      name="radio"
+      :id="id"
+      :value="value"
       :checked="getRadioCheckOption()"
-      @change="onRadioUpdate"/>
+      @change="onRadioUpdate"
+    >
     <label :for="id">
       <span class="radio_element--item">{{value}}</span>
     </label>
