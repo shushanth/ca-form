@@ -2,26 +2,16 @@
   <form-card type="fullPage" shape="roundedTop" mode="default">
     <div class="question-form">
       <form-header type="primary" level="medium" label="Customer Alliance Form"/>
-      <form-ratings
-        label="1."
-        type="radio"
-        subLabel="How do you feel today?"
-        shape="round"
-        :radioItems="ratings"
-        :isRadioSelected="false"
+      <component
+        v-for="(field, index) in formModel"
+        :key="index"
+        :id="field.id"
+        :is="getFormElements(field.type)"
+        @on-update="onFormUpdate"
+        v-bind="getPropsToPass(field, index)"
       />
-      <form-age
-        label="2."
-        type="buttons"
-        subLabel="Your age"
-        :radioButtonsItems="ages"
-        size="default"
-        :isRadioButtonSelected="false"
-      />
-      <form-password label="3." type="password" subLabel="Your password" shape="rounded"/>
-      <form-email label="4." type="text" subLabel="Your email address" shape="rounded"/>
       <form-submit
-        label="submit"
+        label="Submit"
         type="primary"
         size="default"
         align="end"
@@ -44,16 +34,66 @@ export default {
   },
   components: {
     'form-header': BaseHeader,
-    'form-email': BaseInput,
-    'form-password': BaseInput,
-    'form-submit': BaseButton,
-    'form-ratings': BaseRadioGroup,
-    'form-age': BaseRadioGroup,
     'form-card': BaseCard,
+    'form-submit': BaseButton,
+  },
+  data() {
+    return {
+      formData: {},
+      compProps: {},
+    };
   },
   methods: {
     onFormSubmit() {
       console.log('sumbit');
+    },
+    onFormUpdate(updatedValue) {
+      console.log(updatedValue);
+    },
+    getFormElements(value) {
+      const formComponentNameSpace = {
+        rating: BaseRadioGroup,
+        age: BaseRadioGroup,
+        email: BaseInput,
+        password: BaseInput,
+      };
+      return formComponentNameSpace[value];
+    },
+    getPropsToPass(field, id) {
+      const { type, label, ...restFields } = field;
+      const formDefaultProps = {
+        label: `${id + 1}`,
+        formType: type,
+        subLabel: label,
+        ...restFields,
+      };
+      const compPropsToPass = {
+        rating: {
+          elementType: 'radio',
+          shape: 'round',
+          radioItems: this.ratings,
+          isRadioSelected: false,
+          ...formDefaultProps,
+        },
+        age: {
+          elementType: 'buttons',
+          radioButtonsItems: this.ages,
+          size: 'default',
+          isRadioButtonSelected: false,
+          ...formDefaultProps,
+        },
+        password: {
+          elementType: 'password',
+          shape: 'rounded',
+          ...formDefaultProps,
+        },
+        email: {
+          elementType: 'email',
+          shape: 'rounded',
+          ...formDefaultProps,
+        },
+      };
+      return compPropsToPass[type];
     },
   },
   data() {

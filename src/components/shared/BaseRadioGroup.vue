@@ -1,8 +1,8 @@
 <template>
   <div class="radio_group">
-    <base-label :label="label" labelLevel="primary" :subLabel="subLabel" />
+    <base-label :label="label" labelLevel="primary" :subLabel="subLabel"/>
     <div class="radio_group--list">
-      <template v-if="type === 'radio'">
+      <template v-if="elementType === 'radio'">
         <template v-for="(item, index) in this.radioItems.options">
           <base-radio
             :key="index"
@@ -11,11 +11,11 @@
             :startItem="item.id === 1"
             :endItem="checkIfLastRadioItems(item.id)"
             :selectedRadio="selectedRadio"
-            @onRadioUpdate="onRadioUpdate(item.value)"
+            @onRadioUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
           ></base-radio>
         </template>
       </template>
-      <template v-if="type === 'buttons'">
+      <template v-if="elementType === 'buttons'">
         <template v-for="(item, index) in this.radioButtonsItems.options">
           <base-radio-button
             :key="index"
@@ -25,7 +25,7 @@
             :startItem="item.id === 1"
             :selectedRadioButton="selectedRadioButton"
             :endItem="checkIfLastButtonItem(item.id)"
-            @onRadioButtonUpdate="onRadioButtonUpdate"
+            @onRadioButtonUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
           ></base-radio-button>
         </template>
       </template>
@@ -50,19 +50,20 @@ export default {
     radioItems: Object,
     radioButtonsItems: Object,
     align: String,
-    type: String,
+    elementType: String,
+    formType: String,
     size: String,
     isRadioSelected: Boolean,
     isRadioButtonSelected: Boolean,
   },
   methods: {
-    onRadioUpdate(radioUpdated) {
-      const { value, selectedId } = radioUpdated;
-      this.selectedRadio = selectedId;
-    },
-    onRadioButtonUpdate(radioButtonUpdatedConfig) {
-      const { value, selectedId } = radioButtonUpdatedConfig;
-      this.selectedRadioButton = selectedId;
+    onUpdate(type, { value, selectedId }) {
+      if (type === 'radio') {
+        this.selectedRadio = selectedId;
+      } else {
+        this.selectedRadioButton = selectedId;
+      }
+      this.$emit('on-update', { type: this.formType, value });
     },
     checkIfLastButtonItem(id) {
       const { options } = this.radioButtonsItems;
@@ -100,7 +101,6 @@ export default {
     @include styles-flex(row);
   }
 }
-
 
 [type='radio']:checked,
 [type='radio']:not(:checked) {
