@@ -1,6 +1,6 @@
 <template>
   <div class="input">
-    <base-label :label="label" labelLevel="primary" :subLabel="subLabel" />
+    <base-label :label="label" labelLevel="primary" :subLabel="subLabel"/>
     <input
       :class="{
         'input_element': true, 
@@ -8,7 +8,7 @@
       }"
       @input="onInputChange"
       @change="onInputChange"
-      :type="type"
+      :type="elementType"
     >
   </div>
 </template>
@@ -21,7 +21,8 @@ export default {
     subLabel: String,
     value: String,
     shape: String,
-    type: String,
+    formType: String,
+    elementType: String,
     onUpdate: Function,
   },
   components: {
@@ -30,7 +31,7 @@ export default {
   methods: {
     onInputChange({ target }) {
       const { value } = target;
-      const updatedValues = { type: this.type, value };
+      const updatedValues = { type: this.formType, value };
       this.$emit('on-update', updatedValues);
     },
   },

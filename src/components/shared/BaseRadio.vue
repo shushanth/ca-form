@@ -35,7 +35,7 @@ export default {
     onRadioUpdate() {
       this.$emit('onRadioUpdate', {
         value: this.value,
-        seleced: this.id,
+        selectedId: this.id,
       });
     },
   },
