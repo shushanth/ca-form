@@ -26,6 +26,11 @@ export default {
 @import 'styles/base.scss';
 .app {
   @include styles-flex(column);
+  padding: 50px 180px 0;
   background-color: $styles-color-gray-medium;
+
+  @include styles-devices-mobile() {
+    padding: 0;
+  }
 }
 </style>
