@@ -2,6 +2,9 @@
   <form-card type="fullPage" shape="roundedTop" mode="default">
     <div class="question-form">
       <form-header type="primary" level="medium" label="Customer Alliance Form"/>
+      <!-- The below component can be form builder component which can be moved 
+        to different component alltogther, keeping it as itself here as of now 
+      -->
       <component
         v-for="(field, index) in formModel"
         :key="index"
@@ -9,7 +12,13 @@
         :is="getFormElements(field.type)"
         @on-update="onFormUpdate"
         v-bind="getPropsToPass(field, index)"
-      />
+      >
+        <template v-if="doesSubFieldRequired(field)">
+          <SubQuestionForm 
+            :selectedValue="selectedRating"
+            :formModel="field.sub_questions" />
+        </template>
+      </component>
       <form-submit
         label="Submit"
         type="primary"
@@ -27,6 +36,7 @@ import BaseInput from '@/components/shared/BaseInput';
 import BaseHeader from '@/components/shared/BaseHeader';
 import BaseButton from '@/components/shared/BaseButton';
 import BaseRadioGroup from '@/components/shared/BaseRadioGroup';
+import  SubQuestionForm from '@/components/SubQuestionForm';
 export default {
   name: 'QuestionForm',
   props: {
@@ -36,6 +46,7 @@ export default {
     'form-header': BaseHeader,
     'form-card': BaseCard,
     'form-submit': BaseButton,
+    SubQuestionForm,
   },
   data() {
     return {
@@ -49,6 +60,9 @@ export default {
     },
     onFormUpdate(updatedValue) {
       console.log(updatedValue);
+    },
+    doesSubFieldRequired(subFields) {
+      return subFields.sub_questions.length;
     },
     getFormElements(value) {
       const formComponentNameSpace = {
@@ -98,6 +112,7 @@ export default {
   },
   data() {
     return {
+      selectedRating: '1',
       ratings: {
         options: [
           { value: '1', id: 1 },

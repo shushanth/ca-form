@@ -1,37 +1,44 @@
 <template>
-  <div class="radio_group">
-    <base-label :label="label" labelLevel="primary" :subLabel="subLabel"/>
-    <div class="radio_group--list">
-      <template v-if="elementType === 'radio'">
-        <template v-for="(item, index) in this.radioItems.options">
-          <base-radio
-            :key="index"
-            :id="item.id"
-            :value="item.value"
-            :startItem="item.id === 1"
-            :endItem="checkIfLastRadioItems(item.id)"
-            :selectedRadio="selectedRadio"
-            @onRadioUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
-          ></base-radio>
+  <div>
+    <div class="radio_group">
+      <base-label :label="label" labelLevel="primary" :subLabel="subLabel"/>
+      <div class="radio_group--list">
+        <template v-if="elementType === 'radio'">
+          <template v-for="(item, index) in this.radioItems.options">
+            <base-radio
+              :key="index"
+              :id="item.id"
+              :value="item.value"
+              :startItem="item.id === 1"
+              :endItem="checkIfLastRadioItems(item.id)"
+              :selectedRadio="selectedRadio"
+              @onRadioUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
+            ></base-radio>
+          </template>
         </template>
-      </template>
-      <template v-if="elementType === 'buttons'">
-        <template v-for="(item, index) in this.radioButtonsItems.options">
-          <base-radio-button
-            :key="index"
-            :id="item.id"
-            :value="item.value"
-            :size="size"
-            :startItem="item.id === 1"
-            :selectedRadioButton="selectedRadioButton"
-            :endItem="checkIfLastButtonItem(item.id)"
-            @onRadioButtonUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
-          ></base-radio-button>
+        <template v-if="elementType === 'buttons'">
+          <template v-for="(item, index) in this.radioButtonsItems.options">
+            <base-radio-button
+              :key="index"
+              :id="item.id"
+              :value="item.value"
+              :size="size"
+              :startItem="item.id === 1"
+              :selectedRadioButton="selectedRadioButton"
+              :endItem="checkIfLastButtonItem(item.id)"
+              @onRadioButtonUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
+            ></base-radio-button>
+          </template>
         </template>
-      </template>
+      </div>
+    </div>
+    <!--Sub fields if any as of now only this is enabled based on busineess logic -->
+    <div class="radio_group--subfields">
+      <slot></slot>
     </div>
   </div>
 </template>
+
 <script>
 import BaseRadio from './BaseRadio';
 import BaseRadioButton from './BaseRadioButton';
@@ -99,6 +106,9 @@ export default {
   &--list {
     margin: 10px 0;
     @include styles-flex(row);
+  }
+  &--subfields {
+    
   }
 }
 
