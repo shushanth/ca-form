@@ -7,7 +7,10 @@
       }"
     >{{label}}</p>
     <p
-      :class="{'label_subitem': true, 'label_error': (this.labelLevel === 'error') || false}"
+      :class="{
+        'label_subitem': true, 'label_error': (this.labelLevel === 'error') || false,
+        'label_subitem_size--small': this.subLabelSize === 'small' || false,
+      }"
     >{{subLabel}}</p>
   </div>
 </template>
@@ -18,6 +21,7 @@ export default {
     label: String,
     subLabel: String,
     labelLevel: String,
+    subLabelSize: String,
   },
 };
 </script>
@@ -35,6 +39,12 @@ export default {
   &_subitem {
     font-size: 16px;
     color: $styles-color-green--sharp;
+
+    &_size {
+      &--small {
+        font-size: 12px;
+      }
+    }
   }
   &_error {
     color: $styles-color-red-safron;

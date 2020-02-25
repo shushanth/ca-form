@@ -47,7 +47,7 @@ export default {
       }
     },
     onSubFormUpdate() {
-      console.log(1);
+      //handle cases on subform updates, which is not required as of now.
     },
   },
 };
