@@ -31,7 +31,7 @@
         @onClick="onFormSubmit"
       />
     </div>
-    <base-modal id="resultWidget" mode="modal" type="default" size="small" align="rightTopCorner">
+    <base-modal v-if="showResultWidget" mode="modal" type="default" size="small" align="rightTopCorner">
       <base-label subLabelSize="small" subLabel="How do you feel today ?"/>
       <base-label subLabelSize="small" :subLabel="selectedFormValue.rating"/>
       <div class="date_wrapper">
@@ -59,6 +59,7 @@ import {
   getCurrentDate,
   RATINGS_OPTIONS,
   AGE_OPTIONS,
+  ERROR_TEXTS,
 } from '@/utils/utilities';
 export default {
   name: 'QuestionForm',
@@ -75,24 +76,33 @@ export default {
   },
   data() {
     return {
-      selectedFormValue: {
-        rating: false,
-      },
       formData: {},
+      selectedFormValue: {
+        rating: '',
+      },
+      showResultWidget: false,
       errors: {
         password: {
           value: false,
-          text:
-            'Password must contain at least 1 lowercase letter and a number',
+          text: ERROR_TEXTS['password'],
         },
         email: {
           value: false,
-          text: 'Email is not valid',
+          text: ERROR_TEXTS['email'],
         },
       },
+      subFormModelActive: this.getActiveValues(),
       ratings: RATINGS_OPTIONS,
       ages: AGE_OPTIONS,
     };
+  },
+  updated() {
+    const { rating } = this.selectedFormValue;
+    if(this.subFormModelActive[0].includes(rating)) {
+      this.showResultWidget = true;
+    } else {
+      this.showResultWidget = false;
+    }
   },
   methods: {
     getFormElements(value) {
@@ -103,6 +113,15 @@ export default {
         password: BaseInput,
       };
       return formComponentNameSpace[value];
+    },
+    getActiveValues() {
+      const activeValues = this.formModel.map(model => {
+        const values = model.sub_questions.filter(
+          sQuestions => sQuestions.values
+        );
+        return values.map((val) => val.values).flat(Infinity);
+      });
+      return activeValues;
     },
     getPropsToPass(field, id) {
       const { type, label, ...restFields } = field;
@@ -177,10 +196,10 @@ export default {
       this.errors[type].value = !isTypeValidEnough;
     },
     showSubQForm(subFields) {
-      const areSubFieldsEmpty = !isArrayEmpty(
+      const areSubFieldsNotEmpty = !isArrayEmpty(
         subFields.sub_questions
       );
-      return areSubFieldsEmpty;
+      return areSubFieldsNotEmpty;
     },
     getDate() {
       const currentDate = new Date();

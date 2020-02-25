@@ -7,6 +7,11 @@ export const isArrayEmpty = (arr = []) => !(Array.isArray(arr) && arr.length);
 
 export const testRegx = (type, str) => REGEX_CONFIG[type].test(str);
 
+export const ERROR_TEXTS = {
+  'password': 'Password must contain at least 1 lowercase letter and a number',
+  'email': 'Email is not valid'
+};
+
 export const AGE_OPTIONS = {
   options: [{
       value: '<20',

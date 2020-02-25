@@ -1,6 +1,7 @@
 @import './variables.scss';
 @import './mixins/flex.scss';
 @import './mixins/border.scss';
+
 html {
   overflow-x: hidden;
   overflow-y: auto;
@@ -15,6 +16,7 @@ body {
   height: 100vh;
   overflow: auto;
 }
+
 html,
 body,
 div,
@@ -31,6 +33,7 @@ a {
   vertical-align: baseline;
   position: relative;
 }
+
 li,
 ol {
   list-style: none !important;
@@ -41,6 +44,7 @@ ol {
   padding: 0;
   box-sizing: border-box;
 }
+
 button,
 input,
 optgroup,
@@ -71,6 +75,10 @@ button,
 
 .app_color--white {
   background-color: $styles-color-white;
+}
+
+.app-hide {
+  display: none;
 }
 
 .app-hz-line {
