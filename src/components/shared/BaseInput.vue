@@ -4,12 +4,16 @@
     <input
       :class="{
         'input_element': true, 
-        'input_element--rounded': (this.shape === 'rounded') || false 
+        'input_element--rounded': (this.shape === 'rounded') || false,
+        'input_element--error': (this.errors.value) || false
       }"
       @input="onInputChange"
       @change="onInputChange"
       :type="elementType"
     >
+    <template v-if="errors.value">
+      <base-label :subLabel="errors.text" labelLevel="error"/>
+    </template>
   </div>
 </template>
 <script>
@@ -24,6 +28,7 @@ export default {
     formType: String,
     elementType: String,
     onUpdate: Function,
+    errors: Object,
   },
   components: {
     'base-label': BaseLabel,
@@ -60,6 +65,9 @@ export default {
     &--rounded {
       border: 1px solid $styles-color-black--light;
       border-radius: 5px;
+    }
+    &--error {
+      border: 1px solid $styles-color-red-safron;
     }
   }
 }

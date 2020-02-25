@@ -1,7 +1,6 @@
 <template>
   <div class="textfield_element">
     <textarea
-      v-model="value"
       :placeholder="value"
       :class="{
         'textfield_size--small': this.size === 'small' || false,

@@ -12,6 +12,7 @@
         :is="getFormElements(field.type)"
         @on-update="onFormUpdate"
         v-bind="getPropsToPass(field, index)"
+        :errors="errors[field.type]"
       >
         <template v-if="doesSubFieldRequired(field)">
           <SubQuestionForm
@@ -32,6 +33,7 @@
   </form-card>
 </template>
 <script>
+import { testRegx } from '@/utils/utilities';
 import BaseCard from '@/components/shared/BaseCard';
 import BaseInput from '@/components/shared/BaseInput';
 import BaseHeader from '@/components/shared/BaseHeader';
@@ -49,12 +51,6 @@ export default {
     'form-submit': BaseButton,
     SubQuestionForm,
   },
-  data() {
-    return {
-      formData: {},
-      compProps: {},
-    };
-  },
   methods: {
     onFormSubmit() {
       console.log('sumbit');
@@ -66,6 +62,31 @@ export default {
         { [type]: value }
       );
       this.selectedFormValue = updatedFormValues;
+      /**
+       * The below code can be made to debounce so to listen after some
+       * inputs and get the value, not using debounce as of now.
+       * or the BaseInput component can be made lazy to listen input lazily.
+       */
+      if (type === 'password' || type === 'email') {
+        //clearing errors when input value is empty
+        if (!value) {
+          this.clearErrors(type);
+          return;
+        }
+        this.checkForValidation(type, value);
+      }
+    },
+    clearErrors(type) {
+      let latesErrors = this.errors;
+      const errorKeys = Object.keys(latesErrors);
+      errorKeys.map((errorKey) => {
+        latesErrors[errorKey].value = false;
+      });
+      this.errors = latesErrors;
+    },
+    checkForValidation(type, value) {
+      const isTypeValidEnough = testRegx(type, value);
+      this.errors[type].value = !isTypeValidEnough;
     },
     doesSubFieldRequired(subFields) {
       return subFields.sub_questions.length;
@@ -120,6 +141,18 @@ export default {
     return {
       selectedFormValue: {
         rating: '0',
+      },
+      formData: {},
+      errors: {
+        password: {
+          value: false,
+          text:
+            'Password must contain at least 1 lowercase letter and a number',
+        },
+        email: {
+          value: false,
+          text: 'Email is not valid',
+        },
       },
       ratings: {
         options: [

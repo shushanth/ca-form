@@ -23,6 +23,7 @@ module.exports = {
     alias: {
       styles: resolvePathDir('src/assets/styles/'),
       '@/components': resolvePathDir('src/components/'),
+      '@/utils': resolvePathDir('src/utils/'),
     },
   },
   devServer: {
