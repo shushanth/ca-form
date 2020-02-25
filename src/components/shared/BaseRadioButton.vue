@@ -87,14 +87,5 @@ export default {
       }
     }
   }
-  &_element {
-    &--item {
-      position: absolute;
-      font-size: 15px;
-      top: 10px;
-      left: 15px;
-      z-index: 10000;
-    }
-  }
 }
 </style>

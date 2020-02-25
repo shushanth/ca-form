@@ -14,9 +14,10 @@
         v-bind="getPropsToPass(field, index)"
       >
         <template v-if="doesSubFieldRequired(field)">
-          <SubQuestionForm 
-            :selectedValue="selectedRating"
-            :formModel="field.sub_questions" />
+          <SubQuestionForm
+            :selectedValue="selectedFormValue.rating"
+            :formModel="field.sub_questions"
+          />
         </template>
       </component>
       <form-submit
@@ -36,7 +37,7 @@ import BaseInput from '@/components/shared/BaseInput';
 import BaseHeader from '@/components/shared/BaseHeader';
 import BaseButton from '@/components/shared/BaseButton';
 import BaseRadioGroup from '@/components/shared/BaseRadioGroup';
-import  SubQuestionForm from '@/components/SubQuestionForm';
+import SubQuestionForm from '@/components/SubQuestionForm';
 export default {
   name: 'QuestionForm',
   props: {
@@ -58,8 +59,13 @@ export default {
     onFormSubmit() {
       console.log('sumbit');
     },
-    onFormUpdate(updatedValue) {
-      console.log(updatedValue);
+    onFormUpdate({ type, value }) {
+      const updatedFormValues = Object.assign(
+        {},
+        this.selectedFormValue,
+        { [type]: value }
+      );
+      this.selectedFormValue = updatedFormValues;
     },
     doesSubFieldRequired(subFields) {
       return subFields.sub_questions.length;
@@ -112,7 +118,9 @@ export default {
   },
   data() {
     return {
-      selectedRating: '1',
+      selectedFormValue: {
+        rating: '0',
+      },
       ratings: {
         options: [
           { value: '1', id: 1 },
