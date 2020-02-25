@@ -31,7 +31,14 @@
         @onClick="onFormSubmit"
       />
     </div>
-    <base-modal v-if="showResultWidget" mode="modal" type="default" size="small" align="rightTopCorner">
+    <base-modal
+      class="resultWidget"
+      v-if="showResultWidget"
+      mode="modal"
+      type="default"
+      size="small"
+      align="rightTopCorner"
+    >
       <base-label subLabelSize="small" subLabel="How do you feel today ?"/>
       <base-label subLabelSize="small" :subLabel="selectedFormValue.rating"/>
       <div class="date_wrapper">
@@ -98,7 +105,7 @@ export default {
   },
   updated() {
     const { rating } = this.selectedFormValue;
-    if(this.subFormModelActive[0].includes(rating)) {
+    if (this.subFormModelActive[0].includes(rating)) {
       this.showResultWidget = true;
     } else {
       this.showResultWidget = false;
@@ -119,7 +126,7 @@ export default {
         const values = model.sub_questions.filter(
           sQuestions => sQuestions.values
         );
-        return values.map((val) => val.values).flat(Infinity);
+        return values.map(val => val.values).flat(Infinity);
       });
       return activeValues;
     },
@@ -221,6 +228,11 @@ export default {
     font-weight: bold;
     color: $styles-color-blue--cloud;
     padding: 10px 0;
+  }
+}
+.resultWidget {
+  @include styles-devices-mobile() {
+    display: none;
   }
 }
 </style>

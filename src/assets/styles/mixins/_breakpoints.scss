@@ -1,0 +1,9 @@
+$styles-screen-mobile: 300px;
+$styles-screen-tablet: 700px;
+
+
+@mixin styles-devices-mobile {
+    @media (min-width: $styles-screen-mobile) and (max-width: $styles-screen-tablet) {
+        @content;
+    }
+}

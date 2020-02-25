@@ -26,7 +26,6 @@ export default {
   &_wrapper {
     @include styles-flex(column);
     &_type--page {
-      margin: 50px 180px 0;
       padding: 40px;
     }
     &_shape-round--corners-top {
