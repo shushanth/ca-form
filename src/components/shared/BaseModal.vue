@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="id"
     :class="{
       'modal_wrapper': true, 'modal_wrapper--default': this.type ==='default'|| false, 
       'modal_align--right-top': this.align === 'rightTopCorner' || false ,
@@ -17,6 +18,7 @@ export default {
     align: String,
     shape: String,
     type: String,
+    id: String
   },
 };
 </script>

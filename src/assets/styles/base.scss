@@ -72,3 +72,10 @@ button,
 .app_color--white {
   background-color: $styles-color-white;
 }
+
+.app-hz-line {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $styles-color-red-safron;
+  height: 0;
+}
