@@ -8,9 +8,6 @@
       v-bind="getComponentProps(fieldSchema)"
       @onUpdate="onSubFormUpdate"
     />
-    {{childrenFormSchema}}
-    <br>
-    {{currentSelected}}
   </div>
 </template>
 <script>
