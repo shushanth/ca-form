@@ -89,6 +89,7 @@ export default {
             }
         )
         .filter(val => val);
+      debugger;
       this.questionFormChildrens = parentFormValues.filter(
         formVal => !isArrayEmpty(formVal.sub_questions)
       );
@@ -103,6 +104,8 @@ export default {
           const { type } = subQuestionValuesMatches;
           if (!isArrayEmpty(sub_questions) && type) {
             this.childrenFormConfigs = [subQuestionValuesMatches];
+          } else {
+            this.emptyChildForms();
           }
         }
       );
@@ -131,10 +134,15 @@ export default {
       return !isArrayEmpty(formValueOftype.sub_questions);
     },
     doesParentSelectedTypeMatchSelect(fieldSchema) {
-      if(isArrayEmpty(this.childrenFormConfigs)) {
+      if (isArrayEmpty(this.childrenFormConfigs)) {
         return false;
       }
-      return fieldSchema.type === this.childrenFormConfigs[0].parentType;
+      return (
+        fieldSchema.type === this.childrenFormConfigs[0].parentType
+      );
+    },
+    emptyChildForms() {
+      this.childrenFormConfigs = [];
     },
     doesValueMatchSubValues({ type, value }, selectedChildQuestions) {
       const matchedSubQValues = selectedChildQuestions
