@@ -32,8 +32,8 @@
         </template>
       </div>
     </div>
-    <!--Sub fields if any as of now only this is enabled based on busineess logic -->
-    <div class="radio_group--subfields">
+    <!--Sub fields if any as of now only this is enabled based on business logic -->
+    <div>
       <slot></slot>
     </div>
   </div>
@@ -70,7 +70,7 @@ export default {
       } else {
         this.selectedRadioButton = selectedId;
       }
-      this.$emit('on-update', { type: this.formType, value });
+      this.$emit('onUpdate', { type: this.formType, value });
     },
     checkIfLastButtonItem(id) {
       const { options } = this.radioButtonsItems;

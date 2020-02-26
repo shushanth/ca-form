@@ -11,6 +11,10 @@
       @change="onInputChange"
       :type="elementType"
     >
+    <!--Sub fields if any as of now only this is enabled based on business logic -->
+    <div>
+      <slot></slot>
+    </div>
     <template v-if="errors.value">
       <base-label :subLabel="errors.text" labelLevel="error"/>
     </template>
@@ -37,7 +41,7 @@ export default {
     onInputChange({ target }) {
       const { value } = target;
       const updatedValues = { type: this.formType, value };
-      this.$emit('on-update', updatedValues);
+      this.$emit('onUpdate', updatedValues);
     },
   },
 };
