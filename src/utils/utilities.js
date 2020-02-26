@@ -5,11 +5,33 @@ const REGEX_CONFIG = {
 
 export const isArrayEmpty = (arr = []) => !(Array.isArray(arr) && arr.length);
 
-export const testRegx = (type, str) => REGEX_CONFIG[type].test(str);
+export const validateExpression = (type, str) => REGEX_CONFIG[type].test(str);
 
 export const ERROR_TEXTS = {
   'password': 'Password must contain at least 1 lowercase letter and a number',
   'email': 'Email is not valid'
+};
+
+export const uuid = () => {
+  const s4 = () => {
+    return Math.floor((1 + Math.random()) * 0x1000)
+      .toString(16)
+      .substring(1);
+  };
+  return (
+    s4() +
+    s4() +
+    '-' +
+    s4() +
+    '-' +
+    s4() +
+    '-' +
+    s4() +
+    '-' +
+    s4() +
+    s4() +
+    s4()
+  );
 };
 
 export const AGE_OPTIONS = {

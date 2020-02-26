@@ -1,7 +1,7 @@
 <template>
-  <base-card type="fullPage" shape="roundedTop" mode="default">
+  <BaseCard type="fullPage" shape="roundedTop" mode="default">
     <div class="question-form">
-      <base-header type="primary" level="medium" label="Customer Alliance Form"/>
+      <BaseHeader type="primary" level="medium" label="Customer Alliance Form"/>
       <!-- The below component can be form builder component which can be moved 
         to different component alltogther, also moving into seprate component
         with the recursive sub form components can be handled based on form model
@@ -22,7 +22,7 @@
           />
         </template>
       </component>
-      <base-submit
+      <BaseButton
         label="Submit"
         type="primary"
         size="default"
@@ -31,7 +31,7 @@
         @onClick="onFormSubmit"
       />
     </div>
-    <base-modal
+    <BaseModal
       class="resultWidget"
       v-if="showResultWidget"
       mode="modal"
@@ -39,8 +39,8 @@
       size="small"
       align="rightTopCorner"
     >
-      <base-label subLabelSize="small" subLabel="How do you feel today ?"/>
-      <base-label subLabelSize="small" :subLabel="selectedFormValue.rating"/>
+      <BaseLabel subLabelSize="small" subLabel="How do you feel today ?"/>
+      <BaseLabel subLabelSize="small" :subLabel="selectedFormValue.rating"/>
       <div class="date_wrapper">
         <span class="app-hz-line"></span>
         <p class="date_wrapper--display">
@@ -48,8 +48,8 @@
           {{getDate()}}
         </p>
       </div>
-    </base-modal>
-  </base-card>
+    </BaseModal>
+  </BaseCard>
 </template>
 <script>
 import BaseCard from '@/components/shared/BaseCard';
@@ -61,12 +61,13 @@ import BaseLabel from '@/components/shared/BaseLabel';
 import BaseModal from '@/components/shared/BaseModal';
 import SubQuestionForm from '@/components/SubQuestionForm';
 import {
-  testRegx,
+  validateExpression,
   isArrayEmpty,
   getCurrentDate,
   RATINGS_OPTIONS,
   AGE_OPTIONS,
   ERROR_TEXTS,
+  uuid,
 } from '@/utils/utilities';
 export default {
   name: 'QuestionForm',
@@ -74,11 +75,11 @@ export default {
     formModel: { status: Array, required: true },
   },
   components: {
-    'base-header': BaseHeader,
-    'base-card': BaseCard,
-    'base-submit': BaseButton,
-    'base-label': BaseLabel,
-    'base-modal': BaseModal,
+    BaseHeader,
+    BaseCard,
+    BaseButton,
+    BaseLabel,
+    BaseModal,
     SubQuestionForm,
   },
   data() {
@@ -199,7 +200,7 @@ export default {
       this.errors = latesErrors;
     },
     checkForValidation(type, value) {
-      const isTypeValidEnough = testRegx(type, value);
+      const isTypeValidEnough = validateExpression(type, value);
       this.errors[type].value = !isTypeValidEnough;
     },
     showSubQForm(subFields) {
@@ -211,7 +212,7 @@ export default {
     getDate() {
       const currentDate = new Date();
       return `${currentDate.getFullYear()}/${currentDate.getDay()}/${currentDate.getMonth()}`;
-    },
+    }
   },
 };
 </script>
