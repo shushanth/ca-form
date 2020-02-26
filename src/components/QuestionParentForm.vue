@@ -7,6 +7,7 @@
       @onUpdate="onFormUpdate"
       :is="getQuestionParentComponents(fieldSchema.type)"
       v-bind="getQuestionParentComponentProps(fieldSchema, index)"
+      :errors="questionParentForm[fieldSchema.type].error"
     >
       <template>
         <QuestionChildrenForm
@@ -22,7 +23,7 @@
       align="end"
       shape="rounded"
       @onClick="onFormSubmit"
-      :disabled="isFormValid()"
+      :disabled="isFormInvalid()"
     />
   </div>
 </template>
@@ -59,6 +60,7 @@ export default {
   },
   data() {
     return {
+      requiredTypes: [],
       questionParentForm: {
         rating: {
           value: '',
@@ -68,11 +70,20 @@ export default {
         },
         password: {
           value: '',
+          error: {
+            value: false,
+            text: ERROR_TEXTS['password'],
+          },
         },
         email: {
           value: '',
+          error: {
+            value: false,
+            text: ERROR_TEXTS['email'],
+          },
         },
       },
+      requiredTypes: [],
       questionFormChildrens: [],
       childrenFormConfigs: [],
       ratingOptions: RATINGS_OPTIONS,
@@ -117,7 +128,6 @@ export default {
       if (!isArrayEmpty(newValues)) {
         const firstIndex = 0;
         const { parentType } = newValues[firstIndex];
-        debugger;
         const currentChangedForm = this.questionFormChildrens.filter(
           ({ type }) => type === parentType
         )[firstIndex];
@@ -128,60 +138,13 @@ export default {
       }
     },
   },
+  created() {
+    const formTypesRequired = this.formSchema
+      .filter(({ validation: { required } }) => required)
+      .map(({ type }) => type);
+    this.requiredTypes = formTypesRequired;
+  },
   methods: {
-    onFormSubmit() {},
-    isFormValid() {
-      return false;
-    },
-    onFormUpdate(updatedValues) {
-      const { type, value } = updatedValues;
-      const updatedFormType = {
-        [type]: {
-          value,
-          ...this.formSchema.find(val => val.type === type),
-        },
-      };
-      this.questionParentForm = Object.assign(
-        {},
-        this.questionParentForm,
-        updatedFormType
-      );
-    },
-    emitToResult({ type, value, display }) {
-      this.$emit('resultFormSelect', {
-        type,
-        value,
-        display,
-      });
-    },
-    getFormQuestionSchema(type) {
-      const formValueOftype = this.formSchema.find(
-        schema => schema.type === type
-      );
-      return !isArrayEmpty(formValueOftype.sub_questions);
-    },
-    doesParentSelectedTypeMatch(fieldSchema) {
-      if (isArrayEmpty(this.childrenFormConfigs)) {
-        return false;
-      }
-      return (
-        fieldSchema.type === this.childrenFormConfigs[0].parentType
-      );
-    },
-    emptyChildForms() {
-      this.childrenFormConfigs = [];
-    },
-    doesValueMatchSubValues({ type, value }, selectedChildQuestions) {
-      const matchedSubQValues = selectedChildQuestions
-        .map(({ values, questions }) =>
-          values.includes(value) ? questions : []
-        )
-        .flat(Infinity);
-      const matchSubValues = Object.assign({}, ...matchedSubQValues, {
-        parentType: type,
-      });
-      return matchSubValues;
-    },
     getDefaultQuestionProps({
       index,
       id,
@@ -244,6 +207,7 @@ export default {
           componentName: 'password',
           elementType: 'password',
           shape: 'rounded',
+          errors: this.getErrors('password'),
           ...this.getDefaultQuestionProps({
             index,
             ...questionFormSchema,
@@ -254,6 +218,7 @@ export default {
           componentName: 'email',
           elementType: 'email',
           shape: 'rounded',
+          errors: this.getErrors('email'),
           ...this.getDefaultQuestionProps({
             index,
             ...questionFormSchema,
@@ -261,6 +226,123 @@ export default {
         },
       };
       return questionComponentProps[type];
+    },
+    isFormInvalid() {
+      const questionParentFormConfig = this.questionParentForm;
+      const questionParentFormKeys = Object.keys(
+        questionParentFormConfig
+      );
+      //check required case
+      const requiredTypesValid =
+        this.requiredTypes.filter(
+          reqType => questionParentFormConfig[reqType].value
+        ).length === this.requiredTypes.length;
+      const errors = !isArrayEmpty(
+        questionParentFormKeys.filter(questionPkey => {
+          const errorVal =
+            questionParentFormConfig[questionPkey].error;
+          return errorVal && errorVal.value;
+        })
+      );
+      return !requiredTypesValid || errors;
+    },
+    getErrors(type) {
+      return (
+        this.questionParentForm[type] &&
+        this.questionParentForm[type].error
+      );
+    },
+    onFormSubmit() {},
+    onFormUpdate(updatedValues) {
+      const { type, value } = updatedValues;
+      const updatedFormType = {
+        [type]: {
+          value,
+          ...this.formSchema.find(val => val.type === type),
+        },
+      };
+      this.questionParentForm = Object.assign(
+        {},
+        this.questionParentForm,
+        updatedFormType
+      );
+      this.checkForErrors(type, value);
+    },
+    clearErrors(type) {
+      this.questionParentForm = Object.assign(
+        {},
+        {
+          ...this.questionParentForm,
+          ...{
+            [type]: {
+              value: '',
+              error: {
+                value: false,
+                text: '',
+              },
+            },
+          },
+        }
+      );
+    },
+    checkForErrors(formType, formTypeValue) {
+      if (!formTypeValue) {
+        this.clearErrors(formType);
+        return;
+      }
+      if (formType === 'email' || formType === 'password') {
+        const isTypeValidEnough = validateExpression(
+          formType,
+          formTypeValue
+        );
+        this.questionParentForm = {
+          ...this.questionParentForm,
+          ...{
+            [formType]: {
+              ...this.questionParentForm[formType],
+              error: {
+                value: !isTypeValidEnough,
+                text: ERROR_TEXTS[formType],
+              },
+            },
+          },
+        };
+      }
+    },
+    emitToResult({ type, value, display }) {
+      this.$emit('resultFormSelect', {
+        type,
+        value,
+        display,
+      });
+    },
+    getFormQuestionSchema(type) {
+      const formValueOftype = this.formSchema.find(
+        schema => schema.type === type
+      );
+      return !isArrayEmpty(formValueOftype.sub_questions);
+    },
+    doesParentSelectedTypeMatch(fieldSchema) {
+      if (isArrayEmpty(this.childrenFormConfigs)) {
+        return false;
+      }
+      return (
+        fieldSchema.type === this.childrenFormConfigs[0].parentType
+      );
+    },
+    emptyChildForms() {
+      this.childrenFormConfigs = [];
+    },
+    doesValueMatchSubValues({ type, value }, selectedChildQuestions) {
+      const matchedSubQValues = selectedChildQuestions
+        .map(({ values, questions }) =>
+          values.includes(value) ? questions : []
+        )
+        .flat(Infinity);
+      const matchSubValues = Object.assign({}, ...matchedSubQValues, {
+        parentType: type,
+      });
+      return matchSubValues;
     },
   },
 };
