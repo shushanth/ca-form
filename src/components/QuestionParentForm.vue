@@ -6,11 +6,11 @@
       :id="fieldSchema.id"
       @onUpdate="onFormUpdate"
       :is="getQuestionParentComponents(fieldSchema.type)"
-      v-bind="getQuestionComponentProps(fieldSchema, index)"
+      v-bind="getQuestionParentComponentProps(fieldSchema, index)"
     >
       <template>
         <QuestionChildrenForm
-          v-if="doesParentSelectedTypeMatchSelect(fieldSchema)"
+          v-if="doesParentSelectedTypeMatch(fieldSchema)"
           :childrenFormSchema="childrenFormConfigs"
         />
       </template>
@@ -62,23 +62,15 @@ export default {
       questionParentForm: {
         rating: {
           value: '',
-          sub_questions_occur: this.getFormQuestionSchema('rating'),
-          currentSelected: false,
         },
         age: {
           value: '',
-          sub_questions_occur: this.getFormQuestionSchema('age'),
-          currentSelected: false,
         },
         password: {
           value: '',
-          sub_questions_occur: this.getFormQuestionSchema('password'),
-          currentSelected: false,
         },
         email: {
           value: '',
-          sub_questions_occur: this.getFormQuestionSchema('email'),
-          currentSelected: false,
         },
       },
       questionFormChildrens: [],
@@ -125,7 +117,7 @@ export default {
       if (!isArrayEmpty(newValues)) {
         const firstIndex = 0;
         const { parentType } = newValues[firstIndex];
-        debugger
+        debugger;
         const currentChangedForm = this.questionFormChildrens.filter(
           ({ type }) => type === parentType
         )[firstIndex];
@@ -137,8 +129,7 @@ export default {
     },
   },
   methods: {
-    onFormSubmit() {
-    },
+    onFormSubmit() {},
     isFormValid() {
       return false;
     },
@@ -147,7 +138,6 @@ export default {
       const updatedFormType = {
         [type]: {
           value,
-          currentSelected: true,
           ...this.formSchema.find(val => val.type === type),
         },
       };
@@ -170,7 +160,7 @@ export default {
       );
       return !isArrayEmpty(formValueOftype.sub_questions);
     },
-    doesParentSelectedTypeMatchSelect(fieldSchema) {
+    doesParentSelectedTypeMatch(fieldSchema) {
       if (isArrayEmpty(this.childrenFormConfigs)) {
         return false;
       }
@@ -222,7 +212,7 @@ export default {
       };
       return questionFormCompMapper[questionFormType];
     },
-    getQuestionComponentProps(questionFormSchema, index) {
+    getQuestionParentComponentProps(questionFormSchema, index) {
       const { type, label, ...restFields } = questionFormSchema;
       const questionComponentProps = {
         rating: {
