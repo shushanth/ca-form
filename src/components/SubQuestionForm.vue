@@ -5,7 +5,7 @@
       :key="subIndex"
       :id="subField.id"
       :is="getSubFormElements(subField)"
-      @on-update="onSubFormUpdate"
+      @onUpdate="onSubFormUpdate"
       v-bind="getSubFormPropsToPass(subField)"
     />
   </div>

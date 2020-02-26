@@ -43,7 +43,21 @@ export const FORM_MODEL = {
       validation: {
         required: false,
       },
-      sub_questions: [],
+      sub_questions: [
+        {
+          values: ['20-29', '30-39'],
+          questions: [
+            {
+              id: 4,
+              type: 'comment',
+              label: 'Tell us what you loved!',
+              validation: {
+                required: false,
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       id: 6,
@@ -52,7 +66,21 @@ export const FORM_MODEL = {
       validation: {
         required: true,
       },
-      sub_questions: [],
+      sub_questions: [
+        {
+          values: ['customer1', 'alliance1'],
+          questions: [
+            {
+              id: 4,
+              type: 'comment',
+              label: 'Tell us what you loved!',
+              validation: {
+                required: false,
+              },
+            },
+          ],
+        },
+      ],
     },
     {
       id: 7,
