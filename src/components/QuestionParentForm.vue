@@ -96,6 +96,7 @@ export default {
             newValues[parentKey].value && {
               type: newValues[parentKey].type,
               value: newValues[parentKey].value,
+              label: newValues[parentKey].label,
               sub_questions: newValues[parentKey].sub_questions,
             }
         )
@@ -120,10 +121,23 @@ export default {
         }
       );
     },
+    childrenFormConfigs(newValues) {
+      if (!isArrayEmpty(newValues)) {
+        const firstIndex = 0;
+        const { parentType } = newValues[firstIndex];
+        debugger
+        const currentChangedForm = this.questionFormChildrens.filter(
+          ({ type }) => type === parentType
+        )[firstIndex];
+        const { value, label } = currentChangedForm;
+        this.emitToResult({ type: label, value, display: true });
+      } else {
+        this.emitToResult({ display: false });
+      }
+    },
   },
   methods: {
     onFormSubmit() {
-      console.log(this.formData);
     },
     isFormValid() {
       return false;
@@ -142,6 +156,13 @@ export default {
         this.questionParentForm,
         updatedFormType
       );
+    },
+    emitToResult({ type, value, display }) {
+      this.$emit('resultFormSelect', {
+        type,
+        value,
+        display,
+      });
     },
     getFormQuestionSchema(type) {
       const formValueOftype = this.formSchema.find(

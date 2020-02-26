@@ -2,7 +2,28 @@
   <BaseCard type="fullPage" shape="roundedTop" mode="default">
     <div class="question-form">
       <BaseHeader type="primary" level="medium" label="Customer Alliance Form"/>
-      <QuestionParentForm :formSchema="formModel"/>
+      <QuestionParentForm
+        :formSchema="formModel"
+        @resultFormSelect="(updatedVal) => resultFormWidgetUpdate(updatedVal)"
+      />
+      <BaseModal
+        class="resultWidget"
+        v-if="showResultWidget"
+        mode="modal"
+        type="default"
+        size="small"
+        align="rightTopCorner"
+      >
+        <BaseLabel subLabelSize="small" :subLabel="resultWidgetData.type"/>
+        <BaseLabel subLabelSize="small" :subLabel="resultWidgetData.value"/>
+        <div class="date_wrapper">
+          <span class="app-hz-line"></span>
+          <p class="date_wrapper--display">
+            DATE OF EXPERIENCE:
+            {{getDate()}}
+          </p>
+        </div>
+      </BaseModal>
     </div>
   </BaseCard>
 </template>
@@ -30,10 +51,45 @@ export default {
     BaseButton,
     BaseLabel,
     BaseModal,
-    QuestionParentForm
-    // SubQuestionForm,
-  }
+    QuestionParentForm,
+  },
+  data() {
+    return {
+      showResultWidget: false,
+      resultWidgetData: {},
+    };
+  },
+  methods: {
+    resultFormWidgetUpdate(formSelectConfig) {
+      const { display } = formSelectConfig;
+      this.showResultWidget = display;
+      this.resultWidgetData = formSelectConfig;
+    },
+    getDate() {
+      const currentYear = new Date(Date.now());
+      return `${currentYear.getFullYear()}/${currentYear.getDay()}/${currentYear.getMonth()}`;
+    },
+  },
 };
 </script>
 <style lang="scss">
+@import 'styles/base.scss';
+.question-form {
+  @include styles-flex(column);
+  width: 80%;
+}
+.date_wrapper {
+  padding: 18px 0 10px 0;
+  &--display {
+    font-size: 11px;
+    font-weight: bold;
+    color: $styles-color-blue--cloud;
+    padding: 10px 0;
+  }
+}
+.resultWidget {
+  @include styles-devices-mobile() {
+    display: none;
+  }
+}
 </style>
