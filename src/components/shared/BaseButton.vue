@@ -3,6 +3,7 @@
     <button
       :class="{
       'button': true,
+      'button--disabled': this.disabled,
       'button_color--primary': (this.type === 'primary') || false,
       'button_size--default': (this.size === 'default') || false,
       'button--rounded': (this.shape === 'rounded') || false,
@@ -22,6 +23,7 @@ export default {
     size: String,
     shape: String,
     onClick: Function,
+    disabled: Boolean
   },
   methods: {
     btnClick() {
@@ -43,6 +45,10 @@ export default {
       &--primary {
         background: $styles-color-green--peach;
       }
+    }
+    &--disabled {
+      pointer-events: none !important;
+      background-color: $styles-color-green--low;
     }
     &_size {
       &--default {
