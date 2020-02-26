@@ -8,11 +8,22 @@
       :is="getQuestionParentComponents(fieldSchema.type)"
       v-bind="getQuestionComponentProps(fieldSchema, index)"
     >
-      <QuestionChildrenForm
-        v-if="doesParentSelectedTypeMatchSelect(fieldSchema)"
-        :childrenFormSchema="childrenFormConfigs"
-      />
+      <template>
+        <QuestionChildrenForm
+          v-if="doesParentSelectedTypeMatchSelect(fieldSchema)"
+          :childrenFormSchema="childrenFormConfigs"
+        />
+      </template>
     </component>
+    <BaseButton
+      label="Submit"
+      type="primary"
+      size="default"
+      align="end"
+      shape="rounded"
+      @onClick="onFormSubmit"
+      :disabled="isFormValid()"
+    />
   </div>
 </template>
 <script>
@@ -89,7 +100,6 @@ export default {
             }
         )
         .filter(val => val);
-      debugger;
       this.questionFormChildrens = parentFormValues.filter(
         formVal => !isArrayEmpty(formVal.sub_questions)
       );
@@ -112,6 +122,12 @@ export default {
     },
   },
   methods: {
+    onFormSubmit() {
+      console.log(this.formData);
+    },
+    isFormValid() {
+      return false;
+    },
     onFormUpdate(updatedValues) {
       const { type, value } = updatedValues;
       const updatedFormType = {
