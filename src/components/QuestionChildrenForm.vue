@@ -39,7 +39,6 @@ export default {
       return formCompPropsMapper;
     },
     onSubFormUpdate() {
-      console.log('form update');
     },
   },
 };
