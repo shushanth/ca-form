@@ -29,6 +29,7 @@
         align="end"
         shape="rounded"
         @onClick="onFormSubmit"
+        :disabled="isFormValid()"
       />
     </div>
     <BaseModal
@@ -113,6 +114,20 @@ export default {
     }
   },
   methods: {
+    isFormValid() {
+      const errors = isArrayEmpty(
+        Object.keys(this.errors).find(errorKey => {
+          return this.errors[errorKey].value === true;
+        })
+      );
+      console.log(this.errors);
+      const isFormEmpty = isArrayEmpty(
+        Object.keys(this.selectedFormValue).filter(errorKey => {
+          return !!this.selectedFormValue[errorKey];
+        })
+      );
+      return errors && isFormEmpty;
+    },
     getFormElements(value) {
       const formComponentNameSpace = {
         rating: BaseRadioGroup,
@@ -168,9 +183,13 @@ export default {
       return compPropsToPass[type];
     },
     onFormSubmit() {
-      console.log('sumbit');
+      //TODO: handle the formdata and validation
+      console.log(this.formData);
     },
     onFormUpdate({ type, value }) {
+      this.formData = Object.assign({}, this.formData, {
+        [type]: value,
+      });
       const updatedFormValues = Object.assign(
         {},
         this.selectedFormValue,
@@ -212,7 +231,7 @@ export default {
     getDate() {
       const currentDate = new Date();
       return `${currentDate.getFullYear()}/${currentDate.getDay()}/${currentDate.getMonth()}`;
-    }
+    },
   },
 };
 </script>
