@@ -1,5 +1,5 @@
 <template>
-  <div class="input">
+  <div class="input_wrapper">
     <base-label :label="label" labelLevel="primary" :subLabel="subLabel"/>
     <input
       :class="{
@@ -48,7 +48,7 @@ export default {
 </script>
 <style lang="scss">
 @import 'styles/base.scss';
-.input {
+.input_wrapper {
   @include styles-flex(column);
   width: 100%;
   margin: 10px 0;

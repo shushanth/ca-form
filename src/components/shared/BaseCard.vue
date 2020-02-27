@@ -4,7 +4,7 @@
       'card_wrapper': true, 
       'card_wrapper_mode--default': this.mode === 'default' || false,
       'card_wrapper_type--page': (this.type === 'fullPage') || false,
-      'card_wrapper_shape-round--corners-top': (this.shape === 'roundedTop') || false,
+      'card_wrapper_shape-round--corners': (this.shape === 'roundedTop') || false,
     }"
   >
     <slot></slot>
@@ -28,7 +28,7 @@ export default {
     &_type--page {
       padding: 40px;
     }
-    &_shape-round--corners-top {
+    &_shape-round--corners {
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
     }
