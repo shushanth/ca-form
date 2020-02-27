@@ -6,9 +6,12 @@
 <script>
 import QuestionForm from '@/components/QuestionForm';
 /*
- FORM_MODEL an API response and can use to manage state of question form component  
+ FORM_MODEL would be an API response and the model can be used to manage state using any of 
+ state management system, here the whole response is extracted directly from formMode.js file
+ and using this response and feeding the same to the app. not using any state or API entities.
 */
 import { FORM_MODEL } from './formModel.js';
+const { questions } = FORM_MODEL;
 export default {
   name: 'App',
   components: {
@@ -17,7 +20,7 @@ export default {
 
   data() {
     return {
-      questionsModel: FORM_MODEL.questions,
+      questionsModel: questions,
     };
   },
 };
