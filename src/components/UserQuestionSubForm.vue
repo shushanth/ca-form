@@ -13,7 +13,7 @@
 <script>
 import BaseTextField from './shared/BaseTextField.vue';
 export default {
-  name: 'QuestionChildrenForm',
+  name: 'UserQuestionSubForm',
   components: {
     BaseTextField,
   },

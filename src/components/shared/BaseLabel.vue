@@ -43,6 +43,7 @@ export default {
     &_size {
       &--small {
         font-size: 12px;
+        font-weight: bold;
       }
     }
   }

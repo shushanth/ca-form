@@ -2,7 +2,7 @@
   <BaseCard type="fullPage" shape="roundedTop" mode="default">
     <div class="question-form">
       <BaseHeader type="primary" level="medium" label="Customer Alliance Form"/>
-      <QuestionParentForm
+      <UserQuestionParentForm
         :formSchema="formModel"
         @resultFormSelect="(updatedVal) => resultFormWidgetUpdate(updatedVal)"
       />
@@ -27,9 +27,6 @@
     </div>
   </BaseCard>
 </template>
-
-
-
 <script>
 import BaseCard from '@/components/shared/BaseCard';
 import BaseInput from '@/components/shared/BaseInput';
@@ -38,10 +35,9 @@ import BaseButton from '@/components/shared/BaseButton';
 import BaseRadioGroup from '@/components/shared/BaseRadioGroup';
 import BaseLabel from '@/components/shared/BaseLabel';
 import BaseModal from '@/components/shared/BaseModal';
-import QuestionParentForm from '@/components/QuestionParentForm';
-// import SubQuestionForm from '@/components/SubQuestionForm';
+import UserQuestionParentForm from '@/components/UserQuestionParentForm';
 export default {
-  name: 'QuestionForm',
+  name: 'UserQuestionForm',
   props: {
     formModel: { status: Array, required: true },
   },
@@ -51,7 +47,7 @@ export default {
     BaseButton,
     BaseLabel,
     BaseModal,
-    QuestionParentForm,
+    UserQuestionParentForm,
   },
   data() {
     return {

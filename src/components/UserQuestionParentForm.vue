@@ -10,7 +10,7 @@
       :errors="questionParentForm[fieldSchema.type].error"
     >
       <template>
-        <QuestionChildrenForm
+        <UserQuestionSubForm
           v-if="doesParentSelectedTypeMatch(fieldSchema)"
           :childrenFormSchema="childrenFormConfigs"
         />
@@ -32,7 +32,7 @@ import BaseInput from '@/components/shared/BaseInput';
 import BaseHeader from '@/components/shared/BaseHeader';
 import BaseButton from '@/components/shared/BaseButton';
 import BaseRadioGroup from '@/components/shared/BaseRadioGroup';
-import QuestionChildrenForm from '@/components/QuestionChildrenForm';
+import UserQuestionSubForm from '@/components/UserQuestionSubForm';
 import {
   validateExpression,
   isArrayEmpty,
@@ -43,7 +43,7 @@ import {
 } from '@/utils/utilities';
 import BaseTextField from './shared/BaseTextField.vue';
 export default {
-  name: 'QuestionParentForm',
+  name: 'UserQuestionParentForm',
   props: {
     formSchema: {
       status: Array,
@@ -56,7 +56,7 @@ export default {
     BaseButton,
     BaseRadioGroup,
     BaseTextField,
-    QuestionChildrenForm,
+    UserQuestionSubForm,
   },
   data() {
     return {
@@ -103,7 +103,7 @@ export default {
               sub_questions: newValues[parentKey].sub_questions,
             }
         )
-        .filter(val => val);
+        .filter(formValues => formValues);
       this.questionFormChildrens = parentFormValues.filter(
         formVal => !isArrayEmpty(formVal.sub_questions)
       );
@@ -252,7 +252,9 @@ export default {
         this.questionParentForm[type].error
       );
     },
-    onFormSubmit() {},
+    onFormSubmit() {
+      console.log(this.questionParentForm);      
+    },
     onFormUpdate(updatedValues) {
       const { type, value } = updatedValues;
       const updatedFormType = {

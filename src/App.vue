@@ -1,10 +1,10 @@
 <template>
   <div class="app">
-    <QuestionForm :formModel="questionsModel"></QuestionForm>
+    <UserQuestionForm :formModel="questionsModel" />
   </div>
 </template>
 <script>
-import QuestionForm from '@/components/QuestionForm';
+import UserQuestionForm from '@/components/UserQuestionForm';
 /*
  FORM_MODEL would be an API response and the model can be used to manage state using any of 
  state management system, here the whole response is extracted directly from formMode.js file
@@ -15,7 +15,7 @@ const { questions } = FORM_MODEL;
 export default {
   name: 'App',
   components: {
-    QuestionForm,
+    UserQuestionForm,
   },
 
   data() {
