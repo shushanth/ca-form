@@ -63,9 +63,9 @@ export default {
     },
     getDate() {
       const currentYear = new Date(Date.now());
-      return `${currentYear.getFullYear()}/${currentYear.getDay()}/${currentYear.getMonth()}`;
+      return `${currentYear.getFullYear()}/${currentYear.getDate()}/${currentYear.getMonth() + 1}`;
     },
-  },
+  } 
 };
 </script>
 <style lang="scss">
