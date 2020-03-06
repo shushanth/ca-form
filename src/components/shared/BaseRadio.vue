@@ -15,7 +15,7 @@
         :checked="getRadioCheckOption()"
         @change="onRadioUpdate"
       >
-      <div>
+      <div :class="getBackgroundProperties(id)">
         <span class="radio--value">{{value}}</span>
       </div>
     </label>
@@ -29,16 +29,40 @@ export default {
     id: Number,
     value: String,
     selectedRadio: Number,
+    isSelectedColorRequired: Boolean,
   },
   methods: {
     getRadioCheckOption() {
       return this.selectedRadio === this.id;
+    },
+    getRadioBackground(id) {
+      const { value, color } = this.selectedColor;
+      if (id > value) {
+        return null;
+      }
+      return color;
     },
     onRadioUpdate() {
       this.$emit('onRadioUpdate', {
         value: this.value,
         selectedId: this.id,
       });
+    },
+    getBackgroundProperties(id) {
+      if (id > this.selectedRadio) {
+        return null;
+      }
+      return {
+        radio_container_label: true,
+        'radio_container_label--poor':
+          this.selectedRadio <= 2 || false,
+        'radio_container_label--warn':
+          (this.selectedRadio > 2 && this.selectedRadio <= 3) ||
+          false,
+        'radio_container_label--success':
+          (this.selectedRadio > 3 && this.selectedRadio <= 5) ||
+          false,
+      };
     },
   },
 };
@@ -51,6 +75,18 @@ export default {
     height: 40px;
     width: auto;
     margin: 0 10px;
+    &_label {
+      background: $styles-color-gray-dull;
+      &--poor {
+        background-color: $styles-color-red-safron;
+      }
+      &--warn {
+        background-color: $styles-color-yellow--warn;
+      }
+      &--success {
+        background-color: $styles-color-green--peach;
+      }
+    }
     &_element {
       &--item {
         position: absolute;
@@ -81,15 +117,11 @@ input[type='radio'] + div {
   display: inline-block;
   cursor: pointer;
   vertical-align: middle;
-  background: $styles-color-gray-dull;
   border: 1px solid $styles-color-gray-dull;
   border-radius: 100%;
 }
 
 input[type='radio'] + div:hover {
   border-color: $styles-color-cement-white;
-}
-input[type='radio']:checked + div {
-  background: $styles-color-green--peach;
 }
 </style>

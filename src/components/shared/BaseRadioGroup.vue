@@ -12,6 +12,7 @@
               :startItem="item.id === 1"
               :endItem="checkIfLastRadioItems(item.id)"
               :selectedRadio="selectedRadio"
+              :isSelectedColorRequired="hoverBehaviour"
               @onRadioUpdate="({value, selectedId}) => onUpdate(elementType, {value, selectedId})"
             ></base-radio>
           </template>
@@ -62,6 +63,7 @@ export default {
     size: String,
     isRadioSelected: Boolean,
     isRadioButtonSelected: Boolean,
+    hoverBehaviour: Boolean,
   },
   methods: {
     onUpdate(type, { value, selectedId }) {

@@ -183,6 +183,7 @@ export default {
           componentName: 'rating',
           elementType: 'radio',
           shape: 'round',
+          hoverBehaviour: true,
           radioItems: this.ratingOptions,
           isRadioSelected: false,
           ...this.getDefaultQuestionProps({
