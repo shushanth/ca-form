@@ -82,6 +82,9 @@ export default {
             text: ERROR_TEXTS['email'],
           },
         },
+        location: {
+          value: '',
+        },
       },
       requiredTypes: [],
       questionFormChildrens: [],
@@ -131,8 +134,8 @@ export default {
         const currentChangedForm = this.questionFormChildrens.filter(
           ({ type }) => type === parentType
         )[firstIndex];
-        const { value, label } = currentChangedForm;
-        this.emitToResult({ type: label, value, display: true });
+        const { type, value, label } = currentChangedForm;
+        this.emitToResult({ type: label, value, display: true, parent: type });
       } else {
         this.emitToResult({ display: false });
       }
@@ -172,6 +175,7 @@ export default {
         age: BaseRadioGroup,
         password: BaseInput,
         email: BaseInput,
+        location: BaseRadioGroup,
       };
       return questionFormCompMapper[questionFormType];
     },
@@ -181,6 +185,19 @@ export default {
         rating: {
           componentMapper: 'BaseRadioGroup',
           componentName: 'rating',
+          elementType: 'radio',
+          shape: 'round',
+          hoverBehaviour: true,
+          radioItems: this.ratingOptions,
+          isRadioSelected: false,
+          ...this.getDefaultQuestionProps({
+            index,
+            ...questionFormSchema,
+          }),
+        },
+        location: {
+          componentMapper: 'BaseRadioGroup',
+          componentName: 'location',
           elementType: 'radio',
           shape: 'round',
           hoverBehaviour: true,
@@ -254,7 +271,7 @@ export default {
       );
     },
     onFormSubmit() {
-      console.log(this.questionParentForm);      
+      console.log(this.questionParentForm);
     },
     onFormUpdate(updatedValues) {
       const { type, value } = updatedValues;
@@ -312,12 +329,14 @@ export default {
         };
       }
     },
-    emitToResult({ type, value, display }) {
-      this.$emit('resultFormSelect', {
-        type,
-        value,
-        display,
-      });
+    emitToResult({ type, value, display, parent }) {
+      if (parent === 'rating' || parent === 'location') {
+        this.$emit('resultFormSelect', {
+          type,
+          value,
+          display,
+        });
+      }
     },
     getFormQuestionSchema(type) {
       const formValueOftype = this.formSchema.find(

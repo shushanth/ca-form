@@ -53,12 +53,15 @@ export default {
     return {
       showResultWidget: false,
       resultWidgetData: {},
+      resultWidgetData: [],
     };
   },
   methods: {
     resultFormWidgetUpdate(formSelectConfig) {
       const { display } = formSelectConfig;
       this.showResultWidget = display;
+      // this.resultWidgetData.push(formSelectConfig);
+      // console.log(this.resultWidgetData);
       this.resultWidgetData = formSelectConfig;
     },
     getDate() {

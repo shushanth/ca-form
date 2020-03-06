@@ -37,17 +37,38 @@ export const FORM_MODEL = {
       validation: {
         required: false,
       },
+      sub_questions: [],
+    },
+    {
+      id: 10,
+      type: 'location',
+      label: 'How is the weather?',
+      validation: {
+        required: true,
+      },
       sub_questions: [{
-        values: ['20-29', '30-39'],
-        questions: [{
-          id: 4,
-          type: 'comment',
-          label: 'Tell us what you loved!',
-          validation: {
-            required: false,
-          },
-        }, ],
-      }, ],
+          values: ['1', '2'],
+          questions: [{
+            id: 3,
+            type: 'comment',
+            label: 'How can we improve?',
+            validation: {
+              required: false,
+            },
+          }, ],
+        },
+        {
+          values: ['4', '5'],
+          questions: [{
+            id: 4,
+            type: 'comment',
+            label: 'Tell us what you loved!',
+            validation: {
+              required: false,
+            },
+          }, ],
+        },
+      ],
     },
     {
       id: 6,
@@ -56,17 +77,7 @@ export const FORM_MODEL = {
       validation: {
         required: true,
       },
-      sub_questions: [{
-        values: ['customer1', 'alliance1'],
-        questions: [{
-          id: 4,
-          type: 'comment',
-          label: 'use safety methods!',
-          validation: {
-            required: false,
-          },
-        }, ],
-      }, ],
+      sub_questions: [],
     },
     {
       id: 7,
@@ -75,17 +86,7 @@ export const FORM_MODEL = {
       validation: {
         required: true,
       },
-      sub_questions: [{
-        values: ['customer@mail.de', 'alliance1@mail.de'],
-        questions: [{
-          id: 4,
-          type: 'comment',
-          label: 'did you check your inbox?',
-          validation: {
-            required: false,
-          },
-        }, ],
-      }, ],
-    },
+      sub_questions: [],
+    }
   ],
 };
